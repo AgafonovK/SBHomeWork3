@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class Main {
-    private static Map<CarType, List<Car>> foo = new HashMap<>();
+    private static Map<CarType, List<Car>> carsByType = new HashMap<>();
 
     public static void main(String[] args) {
 
@@ -17,9 +17,9 @@ public class Main {
         //fill hashmap
         carList.forEach(car -> {
             CarType carType = CarType.castIntToEnum(car.getCarType());
-            foo.computeIfAbsent(carType, q -> new ArrayList<>()).add(car);
+            carsByType.computeIfAbsent(carType, q -> new ArrayList<>()).add(car);
         });
-        foo.forEach((carType, cars) -> System.out.println(cars.toString()));
+        carsByType.forEach((carType, cars) -> System.out.println(cars.toString()));
 
         //sort foo
         /*foo.forEach((w, carList1) -> {
@@ -30,7 +30,7 @@ public class Main {
 
         Map<CarType, BigDecimal> expensiveByCarType = new HashMap<>();
 
-        foo.forEach((q, w) -> {
+        carsByType.forEach((q, w) -> {
             w.forEach(car -> {
                 expensiveByCarType.compute(q, (h, p) -> {
                     String carType = CarType.castIntToEnum(h.getCarType()).toString();
@@ -89,11 +89,11 @@ public class Main {
 
     static List<Car> getTypeInfo(CarType carType){
         List<Car> carList = new ArrayList<>();
-        carList = new ArrayList<>(foo.get(carType));
+        carList = new ArrayList<>(carsByType.get(carType));
         return carList;
     }
     static List<Car> getTypeInfoSortByMileage(CarType carType, boolean reversed){
-        List<Car> carList = new ArrayList<>(foo.get(carType));
+        List<Car> carList = new ArrayList<>(carsByType.get(carType));
         if (reversed) {
             carList.sort(Comparator.comparing(Car::getCarMileage));
         } else {
@@ -103,7 +103,7 @@ public class Main {
     }
 //TODO check param on NUll
     static List<Car> getTypeInfoSortByAdditionalParameter(CarType carType, boolean reversed){
-        List<Car> carList = new ArrayList<>(foo.get(carType));
+        List<Car> carList = new ArrayList<>(carsByType.get(carType));
         if (reversed) {
             carList.sort(Comparator.comparing(Car::getCarAdditionalParam));
         } else {
