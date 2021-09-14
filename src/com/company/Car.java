@@ -41,12 +41,19 @@ public class Car{
 
     @Override
     public String toString() {
+        if(carAdditionalParam!=null){
         return "Car{" +
                 "carType=" + carType +
                 ", carNumber='" + carNumber + '\'' +
                 ", carMileage=" + carMileage +
                 ", carAdditionalParam='" + carAdditionalParam + '\'' +
                 '}';
+        }else {
+            return "Car{" +
+                    "carType=" + carType +
+                    ", carNumber='" + carNumber + '\'' +
+                    ", carMileage=" + carMileage;
+        }
     }
 
 
