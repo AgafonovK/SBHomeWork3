@@ -1,4 +1,4 @@
-package com.company;
+package com.company.car;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
